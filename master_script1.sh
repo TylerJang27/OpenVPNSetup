@@ -1,5 +1,4 @@
-#to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
-
+#!/bin/bash
 while IFS= read -r line
 do
 	netID=$line
@@ -11,8 +10,6 @@ echo "Enter your Duke password. This information will not be stored:"
 read -s pass
 echo -n "Thank you. Beginning installation process."
 
-read empty
-
 chroot /mnt/mmcblk0p3/ubuntu echo -e "$netID\n$v_m\n$pass" | curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
 ####
 exit
@@ -23,3 +20,5 @@ scp /etc/openvpn/vpnclient1.conf $netID@$v_m:~/client-configs/files/client1.ovpn
 service openvpn restart
 
 echo -n "VPN setup complete."
+
+#to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
