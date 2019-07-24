@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh
+
 while IFS=read -r line
 do
 	netID=$line
@@ -11,6 +13,10 @@ echo "Enter your Duke password:"
 echo "This information will not be stored."
 read -s pass
 echo -n "Thank you. Beginning installation process."
+
+
+echo "Press enter to continue 1"
+read empty
 
 chroot /mnt/mmcblk0p3/ubuntu echo -e "$netID\n$v_m\n$pass" | curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh
 ####

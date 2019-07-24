@@ -51,24 +51,34 @@ sudo systemctl enable openvpn@server
 
 my_ip=$(curl ifconfig.me/ip)
 
+echo "Press enter to continue 8"
+read empty
+
 mkdir -p ~/client-configs/files
 
 curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/base.conf >> ~/client-configs/base.conf
-rm_path="~/client-configs/base.conf"
-rm_line=43
-ad_path="~/client-configs/base.conf"
-ad_line=43
-ad_content="remote $my_ip 1194"
-rem_line
-add_line
+found=$(find / -name base.conf)
+if [[ -z "$found" ]]; then
+	echo "Error. File not found."
+else
+	rm_path="~/client-configs/base.conf"
+	rm_line=43
+	ad_path="~/client-configs/base.conf"
+	ad_line=43
+	ad_content="remote $my_ip 1194"
+	rem_line
+	add_line
 
+	echo "Press enter to continue 9"
+	read empty
 
-curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/make_config.sh >> ~/client-configs/make_config.sh
-########################running?
-chmod 700 ~/client-configs/make_config.sh
+	curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/make_config.sh >> ~/client-configs/make_config.sh
+	########################running?
+	chmod 700 ~/client-configs/make_config.sh
 
-cd ~/client-configs
-sudo ./make_config.sh client1
+	cd ~/client-configs
+	sudo ./make_config.sh client1
 
-echo $status_1
-echo $status_2
+	echo $status_1
+	echo $status_2
+fi
