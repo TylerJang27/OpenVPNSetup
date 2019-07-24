@@ -29,6 +29,6 @@ echo -e "Preparing to copy configuration file\n"
 scp /etc/openvpn/vpnclient1.conf $netID@$v_m:~/client-configs/files/client1.ovpn
 service openvpn restart
 
-echo -n "VPN setup complete."
+echo "VPN setup complete."
 
 #to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
