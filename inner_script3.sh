@@ -5,13 +5,13 @@ read v_m
 read -s pass
 
 uncomment() { #uses uc_path and uc_line to remove the first character of a line
-	touch temp
+	touch temp.txt
 	local uc_line_less=$(($uc_line-1))
 	local uc_line_more=$(($uc_line+1))
-	cat $uc_path | head -n $uc_line_less >> temp
-	cat $uc_path | head -n $uc_line | tail -n 1 | cut -f2 -d ";" >> temp
-	cat $uc_path | tail -n +$uc_line_more >> temp
-	sudo mv temp $uc_path
+	cat $uc_path | head -n $uc_line_less >> temp.txt
+	cat $uc_path | head -n $uc_line | tail -n 1 | cut -f2 -d ";" >> temp.txt
+	cat $uc_path | tail -n +$uc_line_more >> temp.txt
+	sudo mv temp.txt $uc_path
 		##sudo?
 }
 
@@ -20,12 +20,12 @@ ad_line=1
 ad_content=""
 
 add_line() {
-	touch temp
+	touch temp.txt
 	local ad_line_less=$(($uc_line-1))
-	cat $ad_path | head -n $ad_line_less >> temp
-	echo -e $ad_content >> temp
-	cat $ad_path | tail -n +$ad_line >> temp
-	sudo mv temp $ad_path
+	cat $ad_path | head -n $ad_line_less >> temp.txt
+	echo -e $ad_content >> temp.txt
+	cat $ad_path | tail -n +$ad_line >> temp.txt
+	sudo mv temp.txt $ad_path
 		##sudo?
 }
 
@@ -33,12 +33,12 @@ rm_path="/"
 rm_line=1
 
 rem_line() {
-	touch temp
+	touch temp.txt
 	local rm_line_less=$(($rm_line-1))
 	local rm_line_more=$(($rm_line+1))
-	cat $rm_path | head -n $rm_line_less >> temp
-	cat $rm_path | tail -n +$rm_line_more >> temp
-	sudo mv temp $rm_path
+	cat $rm_path | head -n $rm_line_less >> temp.txt
+	cat $rm_path | tail -n +$rm_line_more >> temp.txt
+	sudo mv temp.txt $rm_path
 		##sudo?
 }
 
