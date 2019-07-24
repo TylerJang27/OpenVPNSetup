@@ -1,4 +1,5 @@
 #!/bin/bash
+ls
 
 read netID
 read v_m
