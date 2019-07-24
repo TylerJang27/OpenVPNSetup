@@ -20,6 +20,7 @@ done < temp_pass.txt
 #read -s pass
 #echo -n "Thank you. Beginning installation process."
 
+echo "proceeding to chroot"
 chroot /mnt/mmcblk0p3/ubuntu echo -e "$netID\n$v_m\n$pass" | curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
 ####
 exit
