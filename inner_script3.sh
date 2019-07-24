@@ -1,0 +1,74 @@
+#!/bin/bash
+
+read netID
+read v_m
+read -s pass
+
+uncomment() { #uses uc_path and uc_line to remove the first character of a line
+	touch temp
+	local uc_line_less=$(($uc_line-1))
+	local uc_line_more=$(($uc_line+1))
+	cat $uc_path | head -n $uc_line_less >> temp
+	cat $uc_path | head -n $uc_line | tail -n 1 | cut -f2 -d ";" >> temp
+	cat $uc_path | tail -n +$uc_line_more >> temp
+	sudo mv temp $uc_path
+		##sudo?
+}
+
+ad_path="/"
+ad_line=1
+ad_content=""
+
+add_line() {
+	touch temp
+	local ad_line_less=$(($uc_line-1))
+	cat $ad_path | head -n $ad_line_less >> temp
+	echo -e $ad_content >> temp
+	cat $ad_path | tail -n +$ad_line >> temp
+	sudo mv temp $ad_path
+		##sudo?
+}
+
+rm_path="/"
+rm_line=1
+
+rem_line() {
+	touch temp
+	local rm_line_less=$(($rm_line-1))
+	local rm_line_more=$(($rm_line+1))
+	cat $rm_path | head -n $rm_line_less >> temp
+	cat $rm_path | tail -n +$rm_line_more >> temp
+	sudo mv temp $rm_path
+		##sudo?
+}
+
+echo -n "You have SSHed into your virtual machine."
+
+echo "$pass" | sudo systemctl start openvpn@server
+status_1=$(sudo systemctl status openvpn@server)
+status_2=$(ip addr show tun0)
+sudo systemctl enable openvpn@server
+
+my_ip=$(curl ifconfig.me/ip)
+
+mkdir -p ~/client-configs/files
+######somehow get this file##########################FROM A CURL##################
+	####nano ~/client-configs/base.conf ###########################################
+rm_path="~/client-configs/base.conf"
+rm_line=43
+ad_path="~/client-configs/base.conf"
+ad_line=43
+ad_content="remote $my_ip 1194"
+rem_line
+add_line
+
+
+######somehow get this file##########################FROM A CURL
+	####nano ~/client-configs/make_config.sh######################################
+chmod 700 ~/client-configs/make_config.sh
+
+cd ~/client-configs
+sudo ./make_config.sh client1
+
+echo $status_1
+echo $status_2
