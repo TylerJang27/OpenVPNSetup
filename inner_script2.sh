@@ -1,5 +1,6 @@
 #!/bin/bash
 ls
+curl ifconfig.me/ip
 
 read netID
 read v_m
