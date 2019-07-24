@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh
+#to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
 
-while IFS=read -r line
+while IFS= read -r line
 do
 	netID=$line
 done < /www/cyber-pizza/all/assets/settings/net-id.txt
@@ -18,7 +18,7 @@ echo -n "Thank you. Beginning installation process."
 echo "Press enter to continue 1"
 read empty
 
-chroot /mnt/mmcblk0p3/ubuntu echo -e "$netID\n$v_m\n$pass" | curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh
+chroot /mnt/mmcblk0p3/ubuntu echo -e "$netID\n$v_m\n$pass" | curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
 ####
 exit
 
@@ -28,8 +28,3 @@ scp /etc/openvpn/vpnclient1.conf $netID@$v_m:~/client-configs/files/client1.ovpn
 service openvpn restart
 
 echo -n "VPN setup complete."
-
-
-
-
-#need to get the scripts and the config files (inner script 3) to curl
