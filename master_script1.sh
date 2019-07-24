@@ -1,5 +1,3 @@
-#!/bin/bash
-
 #to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
 
 while IFS= read -r line
