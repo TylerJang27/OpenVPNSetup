@@ -52,8 +52,8 @@ sudo systemctl enable openvpn@server
 my_ip=$(curl ifconfig.me/ip)
 
 mkdir -p ~/client-configs/files
-######somehow get this file##########################FROM A CURL##################
-	####nano ~/client-configs/base.conf ###########################################
+
+curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/base.conf >> ~/client-configs/base.conf
 rm_path="~/client-configs/base.conf"
 rm_line=43
 ad_path="~/client-configs/base.conf"
@@ -63,8 +63,8 @@ rem_line
 add_line
 
 
-######somehow get this file##########################FROM A CURL
-	####nano ~/client-configs/make_config.sh######################################
+curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/make_config.sh >> ~/client-configs/make_config.sh
+########################running?
 chmod 700 ~/client-configs/make_config.sh
 
 cd ~/client-configs
