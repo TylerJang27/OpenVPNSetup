@@ -7,13 +7,10 @@ done < /www/cyber-pizza/all/assets/settings/net-id.txt
 
 echo -n "Enter your virtual machine (in the format of vcm-#####.vm.duke.edu): "
 read v_m
-echo "Enter your Duke password:"
-echo "This information will not be stored."
+echo "Enter your Duke password. This information will not be stored:"
 read -s pass
 echo -n "Thank you. Beginning installation process."
 
-
-echo "Press enter to continue 1"
 read empty
 
 chroot /mnt/mmcblk0p3/ubuntu echo -e "$netID\n$v_m\n$pass" | curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
