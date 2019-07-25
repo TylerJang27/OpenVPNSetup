@@ -1,17 +1,17 @@
 #!/bin/bash
-ls
-
-
 #netID=$1
 #v_m=$2
 #pass=$3
+echo "please enter your password"
+read -s pass
+echo $pass | sudo su
+
 echo "welcome"
 read empty
 
 echo "please enter your netID"
 read netID
-echo "please enter your password"
-read -s pass
+
 
 my_ip_now=$(curl ifconfig.me/ip | cut -f1 -d ".")
 
