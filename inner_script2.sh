@@ -1,7 +1,6 @@
 #!/bin/bash
-#netID=$1
-#v_m=$2
-#pass=$3
+
+
 echo "please enter your password"
 read -s pass
 echo $pass | sudo su
