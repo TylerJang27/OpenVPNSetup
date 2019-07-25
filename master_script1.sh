@@ -34,26 +34,10 @@ else
 	echo "Error. Not in chroot."
 fi
 
+#ssh
 #curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/inner_script2.sh | /bin/bash -s $netID $v_M $pass
 #curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/inner_script3.sh | /bin/bash -s $netID $v_M $pass
-
-if [[ -z "$chroot_checker" ]]; then
-	#/usr/bin/sshpass -p $pass ssh -o StrictHostKeyChecking=no $netID@vcm-$v_m.vm.duke.edu curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/inner_script2.sh | /bin/bash -s $netID $v_m $pass
-	
-	
-	echo "done with chroot"
-	exit
-
-	echo -e "Preparing to copy configuration file\n"
-
-	scp /etc/openvpn/vpnclient1.conf $netID@$v_m:~/client-configs/files/client1.ovpn
-	service openvpn restart
-
-	echo "VPN setup complete."
-else
-	echo "you're not in the chroot"
-	pwd
-	ls
-fi
+#exit
+#exit
 	
 #to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
