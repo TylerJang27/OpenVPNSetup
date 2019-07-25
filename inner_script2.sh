@@ -61,8 +61,8 @@ if [[ $my_ip_now == "67" ]]; then
 	if [[ -z "$found" ]]; then
 		echo "Error. File not found."
 	else
-		tar xvf EasyRSA-unix-v3.0.6.tgz
-		cd ~/EasyRSA-v3.0.6/
+		tar xvf ~/EasyRSA-unix-v3.0.6.tgz
+		cd ~/EasyRSA-unix-.0.6/
 				#cp vars.example vars
 				#nano vars
 		touch vars
