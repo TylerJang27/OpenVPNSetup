@@ -27,7 +27,7 @@ chroot /mnt/mmcblk0p3/ubuntu /bin/bash
 #chroot ubuntu /bin/bash
 
 chroot_checker=$(find / -name ubuntu_chroot 2>/dev/null)
-if [[ -z $"chroot_checker" ]]; then
+if [[ -z "$chroot_checker" ]]; then
 
 	curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/inner_script1.sh | /bin/bash
 	####
