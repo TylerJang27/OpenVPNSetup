@@ -1,18 +1,7 @@
 #!/bin/bash
 
-
-echo "please enter your password"
-read -s pass
-echo $pass | sudo su
-
-echo "welcome"
-read empty
-
-echo "please enter your netID"
-read netID
-
-
 my_ip_now=$(curl ifconfig.me/ip | cut -f1 -d ".")
+echo $my_ip_now
 
 uncomment() { #uses uc_path and uc_line to remove the first character of a line
 	touch temp.txt
@@ -52,7 +41,7 @@ rem_line() {
 if [[ $my_ip_now == "67" ]]; then
 	echo -n "You have SSHed into your virtual machine."
 
-	echo "$pass" | sudo apt update
+	sudo apt update
 	echo "y" | sudo apt install openvpn
 	wget -P ~/ https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz
 
@@ -71,7 +60,7 @@ if [[ $my_ip_now == "67" ]]; then
 			fi
 		done < /temp.txt
 		
-		mv /home/$netID/EasyRSA-v3.0.6 ~/EasyRSA-v3.0.6
+		mv /home/taj26/EasyRSA-v3.0.6 ~/EasyRSA-v3.0.6
 		cd ~/EasyRSA-v3.0.6/
 				#cp vars.example vars
 				#nano vars
