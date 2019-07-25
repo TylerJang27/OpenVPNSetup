@@ -43,6 +43,8 @@ if [[ -z $"chroot_checker" ]]; then
 	echo "VPN setup complete."
 else
 	echo "you're not in the chroot"
+	pwd
+	ls
 fi
 	
 #to run this script, execute the following command: curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/master_script1.sh | /bin/bash
