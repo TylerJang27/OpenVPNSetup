@@ -27,11 +27,20 @@ chroot /mnt/mmcblk0p3/ubuntu /bin/bash
 #chroot ubuntu /bin/bash
 
 chroot_checker=$(find / -name ubuntu_chroot 2>/dev/null)
+
 if [[ -z "$chroot_checker" ]]; then
+	echo "Please ssh now."
+else
+	echo "Error. Not in chroot."
+fi
 
-	curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/inner_script1.sh | /bin/bash
-	####
+#curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/inner_script2.sh | /bin/bash -s $netID $v_M $pass
+#curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/inner_script3.sh | /bin/bash -s $netID $v_M $pass
 
+if [[ -z "$chroot_checker" ]]; then
+	#/usr/bin/sshpass -p $pass ssh -o StrictHostKeyChecking=no $netID@vcm-$v_m.vm.duke.edu curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/inner_script2.sh | /bin/bash -s $netID $v_m $pass
+	
+	
 	echo "done with chroot"
 	exit
 
