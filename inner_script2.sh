@@ -18,7 +18,6 @@ uncomment() { #uses uc_path and uc_line to remove the first character of a line
 	cat $uc_path | head -n $uc_line | tail -n 1 | cut -f2 -d ";" >> temp.txt
 	cat $uc_path | tail -n +$uc_line_more >> temp.txt
 	sudo mv temp.txt $uc_path
-		##sudo?
 }
 
 ad_path="/"
@@ -32,7 +31,6 @@ add_line() {
 	echo -e $ad_content >> temp.txt
 	cat $ad_path | tail -n +$ad_line >> temp.txt
 	sudo mv temp.txt $ad_path
-		##sudo?
 }
 
 rm_path="/"
@@ -45,7 +43,6 @@ rem_line() {
 	cat $rm_path | head -n $rm_line_less >> temp.txt
 	cat $rm_path | tail -n +$rm_line_more >> temp.txt
 	sudo mv temp.txt $rm_path
-		##sudo?
 }
 
 if [[ $my_ip_now == "67" ]]; then
