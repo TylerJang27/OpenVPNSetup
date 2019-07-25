@@ -2,20 +2,21 @@
 while IFS= read -r line
 do
 	netID=$line
-#done < /www/cyber-pizza/all/assets/settings/net-id.txt
-done < temp_net.txt
+done < /www/cyber-pizza/all/assets/settings/net-id.txt
+#done < temp_net.txt
 
 while IFS= read -r line
 do
 	v_m=$line
-done < temp_v_m.txt
+done < /www/cyber-pizza/all/assets/settings/v_m.txt
 
 while IFS= read -r line
 do
 	pass=$line
-done < temp_pass.txt
+done < /www/cyber-pizza/all/assets/settings/pass_temp.txt
+cp /etc/backups/empty /www/cyber-pizza/all/assets/settings/pass_temp.txt
 
-#echo -n "Enter your virtual machine (in the format of vcm-#####.vm.duke.edu): "
+#echo -n "Enter your virtual machine number (the # within in the format of vcm-#####.vm.duke.edu): "
 #read v_m
 #echo "Enter your Duke password. This information will not be stored:"
 #read -s pass
