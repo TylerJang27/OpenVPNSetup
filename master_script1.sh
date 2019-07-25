@@ -23,8 +23,8 @@ cp /etc/backups/empty /www/cyber-pizza/all/assets/settings/pass_temp.txt
 #echo -n "Thank you. Beginning installation process."
 
 echo "proceeding to chroot"
-#chroot /mnt/mmcblk0p3/ubuntu /bin/bash
-chroot ubuntu /bin/bash
+chroot /mnt/mmcblk0p3/ubuntu /bin/bash
+#chroot ubuntu /bin/bash
 
 chroot_checker=$(find / -name ubuntu_chroot 2>/dev/null)
 if [[ -z $"chroot_checker" ]]; then
