@@ -2,12 +2,13 @@
 ls
 my_ip_now=$(curl ifconfig.me/ip | cut -f1 -d ".")
 
-netID=$1
-v_m=$2
-pass=$3
-#read netID
-#read v_m
-#read -s pass
+#netID=$1
+#v_m=$2
+#pass=$3
+echo "please enter your netID"
+read netID
+echo "please enter your password"
+read -s pass
 
 uncomment() { #uses uc_path and uc_line to remove the first character of a line
 	touch temp.txt
