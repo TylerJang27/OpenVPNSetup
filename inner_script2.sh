@@ -61,7 +61,18 @@ if [[ $my_ip_now == "67" ]]; then
 		echo "Error. File not found."
 	else
 		tar xvf ~/EasyRSA-unix-v3.0.6.tgz
-		cd ~/EasyRSA-unix-.0.6/
+		
+		cd /home/
+		ls | cut -f1 -d " " >> temp.txt
+		
+		while IFS= read -r line
+			do if [[ "$line" != "rapid" ]] && [[ "$line" != "vcm" ]] && [[ "$line" != "temp.txt" ]]; then
+				netID=$line
+			fi
+		done < /temp.txt
+		
+		mv /home/$netID/EasyRSA-v3.0.6 ~/EasyRSA-v3.0.6
+		cd ~/EasyRSA-v3.0.6/
 				#cp vars.example vars
 				#nano vars
 		touch vars
