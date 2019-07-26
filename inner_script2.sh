@@ -164,9 +164,6 @@ if [[ $my_ip_now == "67" ]]; then
 			cat ~/client-configs/base.conf | tail -n +44 >> ~/client-configs/base_temp.conf
 			mv ~/client-configs/base_temp.conf ~/client-configs/base.conf
 
-			echo "Press enter to continue 9"
-			read empty
-
 			curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/make_config.sh >> ~/client-configs/make_config.sh
 			########################running?
 			chmod 700 ~/client-configs/make_config.sh
