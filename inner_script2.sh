@@ -142,7 +142,7 @@ if [[ $my_ip_now == "67" ]]; then
 		ufw allow OpenSSH
 		ufw disable
 		echo 1 >/proc/sys/net/ipv4/ip_forward
-		echo "y" | ufw enable
+		#echo "y" | ufw enable
 		
 		systemctl start openvpn@server
 		status_1=$(systemctl status openvpn@server)
