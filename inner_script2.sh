@@ -3,6 +3,9 @@
 my_ip_now=$(curl ifconfig.me/ip | cut -f1 -d ".")
 echo $my_ip_now
 
+echo "Please enter your netID"
+read netID
+
 uncomment() { #uses uc_path and uc_line to remove the first character of a line
 	touch /temp.txt
 	local uc_line_less=$(($uc_line-1))
@@ -61,7 +64,7 @@ if [[ $my_ip_now == "67" ]]; then
 		echo $netID
 		done < /temp.txt
 		
-		mv /home/taj26/EasyRSA-v3.0.6 ~/EasyRSA-v3.0.6
+		mv /home/$netID/EasyRSA-v3.0.6 ~/EasyRSA-v3.0.6
 		cd ~/EasyRSA-v3.0.6/
 				#cp vars.example vars
 				#nano vars
