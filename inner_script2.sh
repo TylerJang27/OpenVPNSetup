@@ -131,15 +131,16 @@ if [[ $my_ip_now == "67" ]]; then
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/before.rules.txt >> /etc/ufw/before_temp.rules
 		mv /etc/ufw/before_temp.rules /etc/ufw/before.rules
 		
-		echo "1"
+		touch /etc/ufw/before_temp.rules
+		cat /etc/ufw/before.rules | head -n 22 >> /etc/ufw/before_temp.rules
+		echo "-A POSTROUTING -s $my_ip_now/8 eth0 -j MASQUERADE" >> /etc/ufw/before_temp.rules
+		cat /etc/ufw/before.rules | tail -n + 24 >> /etc/ufw/before_temp.rules
+		mv /etc/ufw/before_temp.rules /etc/ufw/before.rules
+		
 		ufw allow 1194/udp
-		echo "2"
 		ufw allow OpenSSH
-		echo "3"
 		ufw disable
-		echo "4"
 		echo "y" | ufw enable
-		echo "5"
 	fi
 else
 	echo "Error. You're not in the virtual machine."
