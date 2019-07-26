@@ -2,7 +2,7 @@
 
 my_ip_now=$(curl ifconfig.me/ip | cut -f1 -d ".")
 echo $my_ip_now
-my_ip_now=$(curl ifconfig.me/ip)
+my_ip=$(curl ifconfig.me/ip)
 echo $my_ip
 
 echo "Please enter your netID"
@@ -143,6 +143,8 @@ if [[ $my_ip_now == "67" ]]; then
 		ufw allow OpenSSH
 		ufw disable
 		echo "y" | ufw enable
+		exit
+		exit
 	fi
 else
 	echo "Error. You're not in the virtual machine."
