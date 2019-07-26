@@ -115,9 +115,6 @@ if [[ $my_ip_now == "67" ]]; then
 		touch /etc/openvpn/server_temp.conf
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/server.conf >> /etc/openvpn/server_temp.conf
 		mv /etc/openvpn/server_temp.conf /etc/openvpn/server.conf
-		sleep 2
-		cat /etc/openvpn/server.conf
-		sleep 2
 		
 		touch /etc/sysctl_temp.conf
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/sysctl.conf >> /etc/sysctl.conf
@@ -144,45 +141,48 @@ if [[ $my_ip_now == "67" ]]; then
 		ufw allow 1194/udp
 		ufw allow OpenSSH
 		ufw disable
-		ufw enable
+		echo 1 >/proc/sys/net/ipv4/ip_forward
+		echo "y" | ufw enable
 		
 		systemctl start openvpn@server
-	status_1=$(systemctl status openvpn@server)
-	status_2=$(ip addr show tun0)
-	systemctl enable openvpn@server
+		status_1=$(systemctl status openvpn@server)
+		status_2=$(ip addr show tun0)
+		systemctl enable openvpn@server
 
-	my_ip=$(curl ifconfig.me/ip)
+		my_ip=$(curl ifconfig.me/ip)
 
-	mkdir -p ~/client-configs/files
-	touch ~/client-configs/base.conf
-	curl https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/base.conf >> ~/client-configs/base.conf
-	found=$(find / -name base.conf)
-	if [[ -z "$found" ]]; then
-		echo "Error. File not found."
-	else
-		touch ~/client-configs/base_temp.conf
-		cat ~/client-configs/base.conf | head -n 42 >> ~/client-configs/base_temp.conf
-		echo "remote $my_ip 1194" >> ~/client-configs/base_temp.conf
-		cat ~/client-configs/base.conf | tail -n +44 >> ~/client-configs/base_temp.conf
-		mv ~/client-configs/base_temp.conf ~/client-configs/base.conf
+		mkdir -p ~/client-configs/files
+		touch ~/client-configs/base.conf
+		curl https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/base.conf >> ~/client-configs/base.conf
+		found=$(find / -name base.conf)
+		if [[ -z "$found" ]]; then
+			echo "Error. File not found."
+		else
+			touch ~/client-configs/base_temp.conf
+			cat ~/client-configs/base.conf | head -n 42 >> ~/client-configs/base_temp.conf
+			echo "remote $my_ip 1194" >> ~/client-configs/base_temp.conf
+			cat ~/client-configs/base.conf | tail -n +44 >> ~/client-configs/base_temp.conf
+			mv ~/client-configs/base_temp.conf ~/client-configs/base.conf
 
-		echo "Press enter to continue 9"
-		read empty
+			echo "Press enter to continue 9"
+			read empty
 
-		curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/make_config.sh >> ~/client-configs/make_config.sh
-		########################running?
-		chmod 700 ~/client-configs/make_config.sh
+			curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/make_config.sh >> ~/client-configs/make_config.sh
+			########################running?
+			chmod 700 ~/client-configs/make_config.sh
 
-		cd ~/client-configs
-		./make_config.sh client1
-		sleep 2
-		echo $status_1
-		echo $status_2
-		sleep 5
-	fi
+			cd ~/client-configs
+			./make_config.sh client1
+			sleep 2
+			echo $status_1
+			echo $status_2
+			sleep 5
+			cp /root/client-configs/files/client1.ovpn /home/client1.ovpn
+		fi
 		
-		exit
-		exit
+		#exit
+		#exit
+		echo "Please continue with the installation instructions."
 	fi
 else
 	echo "Error. You're not in the virtual machine."
