@@ -111,22 +111,21 @@ if [[ $my_ip_now == "67" ]]; then
 		echo "Press enter to continue 6"
 		read empty
 		
+		touch /etc/openvpn/server_temp.conf
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/server.conf >> /etc/openvpn/server.conf
-
+		mv /etc/openvpn/server_temp.conf /etc/openvpn/server.conf
+		
+		touch /etc/sysctl_temp.conf
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/sysctl.conf >> /etc/sysctl.conf
-
+		mv /etc/sysctl_temp.conf /etc/sysctl.conf
+		
 		sysctl -p
 		apt-get install ufw
 
+		touch /etc/default/ufw_temp
+		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/sysctl.conf >> /etc/default/ufw_temp
+		mv /etc/default/ufw_temp /etc/default/ufw
 		echo "# START OPENVPN RULES\n# NAT table rules\n*nat\n:POSTROUTING ACCEPT [0:0]\n# Allow traffic from OpenVPN client to eth0\n-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE\nCOMMIT\n# END OPENVPN RULES" >> /etc/ufw/before.rules
-		add_line
-		rm_path="/etc/default/ufw"
-		rm_line=19
-		ad_path="/etc/default/ufw"
-		ad_line=19
-		ad_content="DEFAULT_FORWARD_POLICY=\"ACCEPT\""
-		rem_line
-		add_line
 
 		ufw allow 1194/udp
 		ufw allow OpenSSH
