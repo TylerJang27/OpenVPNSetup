@@ -11,14 +11,13 @@ echo "please enter your password"
 read -s pass
 
 uncomment() { #uses uc_path and uc_line to remove the first character of a line
-	touch temp.txt
+	touch /temp.txt
 	local uc_line_less=$(($uc_line-1))
 	local uc_line_more=$(($uc_line+1))
-	cat $uc_path | head -n $uc_line_less >> temp.txt
-	cat $uc_path | head -n $uc_line | tail -n 1 | cut -f2 -d ";" >> temp.txt
-	cat $uc_path | tail -n +$uc_line_more >> temp.txt
-	sudo mv temp.txt $uc_path
-		##sudo?
+	cat $uc_path | head -n $uc_line_less >> /temp.txt
+	cat $uc_path | head -n $uc_line | tail -n 1 | cut -f2 -d ";" >> /temp.txt
+	cat $uc_path | tail -n +$uc_line_more >> /temp.txt
+	mv /temp.txt $uc_path
 }
 
 ad_path="/"
@@ -26,39 +25,36 @@ ad_line=1
 ad_content=""
 
 add_line() {
-	touch temp.txt
+	touch /temp.txt
 	local ad_line_less=$(($uc_line-1))
-	cat $ad_path | head -n $ad_line_less >> temp.txt
+	cat $ad_path | head -n $ad_line_less >> /temp.txt
 	echo -e $ad_content >> temp.txt
-	cat $ad_path | tail -n +$ad_line >> temp.txt
-	sudo mv temp.txt $ad_path
-		##sudo?
+	cat $ad_path | tail -n +$ad_line >> /temp.txt
+	mv /temp.txt $ad_path
 }
 
 rm_path="/"
 rm_line=1
 
 rem_line() {
-	touch temp.txt
+	touch /temp.txt
 	local rm_line_less=$(($rm_line-1))
 	local rm_line_more=$(($rm_line+1))
-	cat $rm_path | head -n $rm_line_less >> temp.txt
-	cat $rm_path | tail -n +$rm_line_more >> temp.txt
-	sudo mv temp.txt $rm_path
-		##sudo?
+	cat $rm_path | head -n $rm_line_less >> /temp.txt
+	cat $rm_path | tail -n +$rm_line_more >> /temp.txt
+	mv /temp.txt $rm_path
 }
+
+
 if [[ $my_ip_now == "67" ]]; then
 	echo -n "You have SSHed into your virtual machine."
 
 	echo "$pass" | sudo systemctl start openvpn@server
 	status_1=$(sudo systemctl status openvpn@server)
 	status_2=$(ip addr show tun0)
-	sudo systemctl enable openvpn@server
+	systemctl enable openvpn@server
 
 	my_ip=$(curl ifconfig.me/ip)
-
-	echo "Press enter to continue 8"
-	read empty
 
 	mkdir -p ~/client-configs/files
 
@@ -83,7 +79,7 @@ if [[ $my_ip_now == "67" ]]; then
 		chmod 700 ~/client-configs/make_config.sh
 
 		cd ~/client-configs
-		sudo ./make_config.sh client1
+		./make_config.sh client1
 
 		echo $status_1
 		echo $status_2
