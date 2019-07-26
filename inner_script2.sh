@@ -134,9 +134,9 @@ if [[ $my_ip_now == "67" ]]; then
 		mv /etc/ufw/before_temp.rules /etc/ufw/before.rules
 		
 		touch /etc/ufw/before_temp.rules
-		cat /etc/ufw/before.rules | head -n 22 >> /etc/ufw/before_temp.rules
+		cat /etc/ufw/before.rules | head -n 21 >> /etc/ufw/before_temp.rules
 		echo "-A POSTROUTING -s $my_ip/8 eth0 -j MASQUERADE" >> /etc/ufw/before_temp.rules
-		cat /etc/ufw/before.rules | tail -n +24 >> /etc/ufw/before_temp.rules
+		cat /etc/ufw/before.rules | tail -n +23 >> /etc/ufw/before_temp.rules
 		mv /etc/ufw/before_temp.rules /etc/ufw/before.rules
 		
 		ufw allow 1194/udp
