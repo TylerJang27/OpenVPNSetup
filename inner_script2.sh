@@ -113,8 +113,11 @@ if [[ $my_ip_now == "67" ]]; then
 		gzip -d /etc/openvpn/server.conf.gz
 		
 		touch /etc/openvpn/server_temp.conf
-		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/server.conf >> /etc/openvpn/server.conf
+		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/server.conf >> /etc/openvpn/server_temp.conf
 		mv /etc/openvpn/server_temp.conf /etc/openvpn/server.conf
+		sleep 2
+		cat /etc/openvpn/server.conf
+		sleep 2
 		
 		touch /etc/sysctl_temp.conf
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/sysctl.conf >> /etc/sysctl.conf
@@ -134,7 +137,7 @@ if [[ $my_ip_now == "67" ]]; then
 		
 		touch /etc/ufw/before_temp.rules
 		cat /etc/ufw/before.rules | head -n 21 >> /etc/ufw/before_temp.rules
-		echo "-A POSTROUTING -s 10.8.0.0/8 eth0 -j MASQUERADE" >> /etc/ufw/before_temp.rules
+		echo -e "-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE\nCOMMIT" >> /etc/ufw/before_temp.rules
 		cat /etc/ufw/before.rules | tail -n +23 >> /etc/ufw/before_temp.rules
 		mv /etc/ufw/before_temp.rules /etc/ufw/before.rules
 		
