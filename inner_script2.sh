@@ -108,7 +108,7 @@ if [[ $my_ip_now == "67" ]]; then
 		cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
 		gzip -d /etc/openvpn/server.conf.gz
 
-		echo "Press enter to continue 6"
+		echo "***Please press enter to continue***"
 		read empty
 		
 		touch /etc/openvpn/server_temp.conf
@@ -127,10 +127,15 @@ if [[ $my_ip_now == "67" ]]; then
 		mv /etc/default/ufw_temp /etc/default/ufw
 		echo -e "# START OPENVPN RULES\n# NAT table rules\n*nat\n:POSTROUTING ACCEPT [0:0]\n# Allow traffic from OpenVPN client to eth0\n-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE\nCOMMIT\n# END OPENVPN RULES" >> /etc/ufw/before.rules
 
+		echo "1"
 		ufw allow 1194/udp
+		echo "2"
 		ufw allow OpenSSH
+		echo "3"
 		ufw disable
+		echo "4"
 		echo "y" | ufw enable
+		echo "5"
 	fi
 else
 	echo "Error. You're not in the virtual machine."
