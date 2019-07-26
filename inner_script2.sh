@@ -1,7 +1,7 @@
 #!/bin/bash
 
 my_ip_now=$(curl ifconfig.me/ip | cut -f1 -d ".")
-echo $my_ip_now
+#echo $my_ip_now
 my_ip=$(curl ifconfig.me/ip)
 echo $my_ip
 
@@ -135,11 +135,11 @@ if [[ $my_ip_now == "67" ]]; then
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/before.rules.txt >> /etc/ufw/before_temp.rules
 		mv /etc/ufw/before_temp.rules /etc/ufw/before.rules
 		
-		touch /etc/ufw/before_temp.rules
-		cat /etc/ufw/before.rules | head -n 21 >> /etc/ufw/before_temp.rules
-		echo -e "-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE\nCOMMIT" >> /etc/ufw/before_temp.rules
-		cat /etc/ufw/before.rules | tail -n +23 >> /etc/ufw/before_temp.rules
-		mv /etc/ufw/before_temp.rules /etc/ufw/before.rules
+		#touch /etc/ufw/before_temp.rules
+		#cat /etc/ufw/before.rules | head -n 21 >> /etc/ufw/before_temp.rules
+		#echo -e "-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE\nCOMMIT" >> /etc/ufw/before_temp.rules
+		#cat /etc/ufw/before.rules | tail -n +23 >> /etc/ufw/before_temp.rules
+		#mv /etc/ufw/before_temp.rules /etc/ufw/before.rules
 		
 		ufw allow 1194/udp
 		ufw allow OpenSSH

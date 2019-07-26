@@ -8,6 +8,12 @@
 #   ufw-before-forward
 #
 
+# NAT table rules
+*nat
+:POSTROUTING ACCEPT [0:0]
+-A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE
+COMMIT
+
 # Don't delete these required lines, otherwise there will be errors
 *filter
 :ufw-before-input - [0:0]
@@ -15,11 +21,6 @@
 :ufw-before-forward - [0:0]
 :ufw-not-local - [0:0]
 # End required lines
-
-# NAT table rules
-*nat
-:POSTROUTING ACCEPT [0:0]
--A POSTROUTING -s 10.8.0.0/8 -o eth0 -j MASQUERADE
 
 # allow all on loopback
 -A ufw-before-input -i lo -j ACCEPT
