@@ -109,8 +109,8 @@ if [[ $my_ip_now == "67" ]]; then
 				##
 		cp ~/EasyRSA-v3.0.6/ta.key ~/client-configs/keys/
 		cp /etc/openvpn/ca.crt ~/client-configs/keys/
-		cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
-		gzip -d /etc/openvpn/server.conf.gz
+		#cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
+		#gzip -d /etc/openvpn/server.conf.gz
 		
 		touch /etc/openvpn/server_temp.conf
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/server.conf >> /etc/openvpn/server_temp.conf

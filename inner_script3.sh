@@ -53,8 +53,8 @@ if [[ $my_ip_now == "67" ]]; then
 	my_ip=$(curl ifconfig.me/ip)
 
 	mkdir -p ~/client-configs/files
-
-	curl -Ls https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/base.conf >> ~/client-configs/base.conf
+	touch ~/client-configs/base.conf
+	curl https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/base.conf >> ~/client-configs/base.conf
 	found=$(find / -name base.conf)
 	if [[ -z "$found" ]]; then
 		echo "Error. File not found."
