@@ -47,6 +47,8 @@ if [[ $my_ip_now == "67" ]]; then
 	echo -n "You have SSHed into your virtual machine."
 
 	apt update
+	apt install net-tools
+	
 	echo "y" | apt install openvpn
 	wget -P ~/ https://github.com/OpenVPN/easy-rsa/releases/download/v3.0.6/EasyRSA-unix-v3.0.6.tgz
 
@@ -109,9 +111,6 @@ if [[ $my_ip_now == "67" ]]; then
 		cp /etc/openvpn/ca.crt ~/client-configs/keys/
 		cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/
 		gzip -d /etc/openvpn/server.conf.gz
-
-		echo "***Please press enter to continue***"
-		read empty
 		
 		touch /etc/openvpn/server_temp.conf
 		curl -L https://raw.githubusercontent.com/TylerJang27/OpenVPNSetup/master/server.conf >> /etc/openvpn/server.conf
@@ -142,7 +141,7 @@ if [[ $my_ip_now == "67" ]]; then
 		ufw allow 1194/udp
 		ufw allow OpenSSH
 		ufw disable
-		echo "y" | ufw enable
+		ufw enable
 		exit
 		exit
 	fi
